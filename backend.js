@@ -1,4 +1,4 @@
-class Usuario{
+/* class Usuario{
     constructor (nombre,apellido,){
         this.nombre = nombre
         this.apellido = apellido
@@ -46,4 +46,35 @@ persona2.addMascota('Perro');
 persona2.addMascota('Pony');
 persona2.getMascota();
 persona2.addBook([{titulo:"La Cenicienta", autor:"Hermanos Grimm"},{titulo:"Thor", autor:"Stan Lee"}]);
-console.log (persona2.getBooks())
+console.log (persona2.getBooks()) */
+
+
+const mostrarPalabras = (palabra,tiempo,cb) =>{
+    let i = 0;
+    let divisiones = palabra.split(" ");
+
+    const recorrerPalabra = ()=>{
+        if(i<divisiones.length){
+            console.log(divisiones[i]);
+            i++;
+            
+        }else{
+            clearInterval(timer);
+            cb()
+        }
+    }
+    const timer = setInterval(recorrerPalabra,tiempo);
+}
+
+const funcionFinalizado = () => console.log("TERMINÉ");
+
+setTimeout(()=>{
+    mostrarPalabras('HOLA MUNDO QUÉ TAL ESTÁS', 1000, funcionFinalizado)
+},0);
+setTimeout(()=>{
+    mostrarPalabras('LA CIGUEÑA CHUECA DORMÍA', 1000 ,funcionFinalizado)
+},250);
+setTimeout(()=>{
+    mostrarPalabras('LOS PANTANOS SON MUY DIVERTIDOS', 1000 ,funcionFinalizado)
+},500);
+
