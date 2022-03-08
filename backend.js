@@ -1,80 +1,61 @@
-/* class Usuario{
-    constructor (nombre,apellido,){
-        this.nombre = nombre
-        this.apellido = apellido
-        this.mascota = []
-        this.libros = []
-    }
+//DESAFIO N° 4
 
-    getFullName = ()=> {
-        console.log (`mi nombre es ${this.nombre} ${this.apellido}`)
-    }
-
-    addMascota = (nuevaMascota)=>{
-        this.mascota.push(nuevaMascota)
-    }
-
-    getMascota = () =>{
-        console.log(this.mascota)
-    }
-
-    addBook = (book) =>{
-        this.libros = book
-    }
-
-    getBooks = () =>{
-        let getTitle = this.libros.map (libro=>{
-            return libro.titulo;
-        })
-        return getTitle;
-    }
-}
-
-let persona1 = new Usuario ("Fernando", "Ramos");
-let persona2 = new Usuario ("Raul", "Perez");
+const { fromEvent, map } = rxjs;
 
 
-persona1.getFullName();
-persona1.addMascota('Gato');
-persona1.addMascota('Cabra');
-persona1.getMascota();
-persona1.addBook([{titulo:"La Sirenita", autor:"Hans Christian Andersen"},{titulo:"El Hombre Araña", autor:"Stan Lee"}]);
-console.log (persona1.getBooks())
-
-persona2.getFullName();
-persona2.addMascota('Perro');
-persona2.addMascota('Pony');
-persona2.getMascota();
-persona2.addBook([{titulo:"La Cenicienta", autor:"Hermanos Grimm"},{titulo:"Thor", autor:"Stan Lee"}]);
-console.log (persona2.getBooks()) */
+const textBox = document.getElementById("textBox");
+const textMirror = document.getElementsByTagName("span")[0];
 
 
-const mostrarPalabras = (palabra,tiempo,cb) =>{
-    let i = 0;
-    let divisiones = palabra.split(" ");
+const textObservable = fromEvent(textBox, "keyup");
 
-    const recorrerPalabra = ()=>{
-        if(i<divisiones.length){
-            console.log(divisiones[i]);
-            i++;
-            
-        }else{
-            clearInterval(timer);
-            cb()
+
+const textoInvertido = textObservable.pipe(
+    map(event => {
+        if (event.target.value === "error") {
+            observer.error("Se desuscribió al observer por escribir ´error´");
         }
-    }
-    const timer = setInterval(recorrerPalabra,tiempo);
+        if (event.target.value === "completed") {
+            observer.complete();
+        }
+        let mirror = event.target.value.split('').reverse().join('');
+        return mirror
+    })
+)
+
+
+let suscribed = true;
+
+ 
+const disableMirror = () => {
+    textBox.value = "";
+    textBox.setAttribute("disabled", true)
+    textMirror.innerHTML = "";
+    observer.unsubscribe();
+    suscribed = false;
 }
 
-const funcionFinalizado = () => console.log("TERMINÉ");
 
-setTimeout(()=>{
-    mostrarPalabras('HOLA MUNDO QUÉ TAL ESTÁS', 1000, funcionFinalizado)
-},0);
-setTimeout(()=>{
-    mostrarPalabras('LA CIGUEÑA CHUECA DORMÍA', 1000 ,funcionFinalizado)
-},250);
-setTimeout(()=>{
-    mostrarPalabras('LOS PANTANOS SON MUY DIVERTIDOS', 1000 ,funcionFinalizado)
-},500);
+let observer = textoInvertido.subscribe({
+    next: (valor) => {
+        textMirror.innerHTML = valor;
+    },
+    error: (error) => {
+        disableMirror();
+        console.error(error);
+    },
+    complete: () => {
+        disableMirror();
+        console.info("La operación se completó y se desuscrubió al observer.");
+    }
+})
 
+
+setTimeout(() => {
+    if (suscribed) {
+        disableMirror();
+        console.log("Se desuscribió al observable luego de pasar 30 segundos.")
+    } else {
+        console.log("Pasó el tiempo pero ya se había desuscripto")
+    }
+}, 30000)
