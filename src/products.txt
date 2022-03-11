@@ -1,0 +1,1 @@
+[{"title":"Comida de Perros","price":1000,"thumbnail":"URLProduct1","id":1},{"title":"Comida de Gatos","price":950,"thumbnail":"URLProduct2","id":2}]{"title":"Comida de Peces","price":800,"thumbnail":"URLProduct3","id":3}]
