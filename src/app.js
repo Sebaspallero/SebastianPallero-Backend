@@ -20,9 +20,8 @@ app.get ('/api/products',(req,res)=>{
 })
 
 app.get('/api/product/:id',(req,res)=>{
-    let id = req.params
-    if(!isNaN(id)) return res.status(400).send({error:'ID must be a number'})
-   
+    let url = parseInt(req.params)
+    res.send(productService.getProduct(url));
 })
 
 app.post('/api/products',(req,res) =>{
