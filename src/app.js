@@ -1,6 +1,6 @@
-//Desafio 7
 import express from 'express'
-import {array} from './archivos.js'
+import ProductContainer from './services/productContainer.js';
+
 
 const app = express();
 const PORT = 8080;
@@ -8,27 +8,26 @@ const server = app.listen(PORT,()=>{
     console.log(`Listening on port ${PORT}`)
 })
 
-let visitasItem = 0
-let visitasItems = 0
-let productos = array
 
-app.get('/items', async(req,res)=>{
-    res.send({
-        items: productos,
-        cantidad: productos.length}
-        )
-        (++visitasItems)
+app.use (express.json());
+app.use(express.urlencoded({extended:true}));
+
+const productService = new ProductContainer();
+
+app.get ('/api/products',(req,res)=>{
+    if (productService.getAllProducts() == 0) return res.status(400).send({error:'No products on the list'});
+    res.send(productService);
 })
 
-app.get('/item-random', async(req,res)=>{
-    let randomProduct = (productos)=>{ return productos [Math.floor(Math.random() * productos.length)]};
-    res.send(
-        {item: (randomProduct(productos))}
-    )
-    (++visitasItem)
+app.get('/api/product/:id',(req,res)=>{
+    let id = req.params
+    if(!isNaN(id)) return res.status(400).send({error:'ID must be a number'})
+   
 })
 
-
-app.get('/visitas',async(req,res)=>{
-    res.send(`Visitas en la sección Items: ${visitasItem} - Visitas en la sección Item: ${visitasItems}`)
+app.post('/api/products',(req,res) =>{
+    let id = productService.getAllProducts().length+1
+    let {title,price,thumbnail} = req.body;
+    let product = productService.saveProduct({title,price,thumbnail,id});
+    res.send({message:'Product saved'})
 })
