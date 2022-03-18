@@ -20,8 +20,14 @@ app.get ('/api/products',(req,res)=>{
 })
 
 app.get('/api/product/:id',(req,res)=>{
-    let url = parseInt(req.params)
-    res.send(productService.getProduct(url));
+    let url = (req.params.id)
+    if (url == NaN) return res.status(400).send({error:'ID must be a number'});
+    if (url <= 0) return res.status(400).send({error:'ID must be higher than 0'});
+    if (url > productService.getProduct(url)) return res.status(400).send({error:'Product does not exist, try a different ID'});
+    res.send({
+        message:'This is your product',
+        product: productService.getProduct(url)
+    });
 })
 
 app.post('/api/products',(req,res) =>{

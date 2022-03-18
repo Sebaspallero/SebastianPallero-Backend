@@ -8,10 +8,9 @@ export default class ProductContainer{
         return this.products;
     }
 
-    getProduct = (number)=>{
-        this.products.filter((product)=> {
-            return product.id == number;
-        });
+    getProduct = (url)=>{
+        let findId = this.products.filter(product => product.id == url)
+        return (findId)
     }
 
     saveProduct = (product)=>{
