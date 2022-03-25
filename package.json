@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Sebaspallero/SebastianPallero-Backend#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "multer": "^1.4.4"
   }
 }
