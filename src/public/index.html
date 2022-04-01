@@ -4,23 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Coder - Backend</title>
 </head>
 <body>
-    <h1>Productos para Mascotas</h1>
-    <form id="productForm">
+    <h2 class="SubTitle">Productos para Mascotas</h2>
+    <form id="productForm" class="productForm">
         <label>Nombre</label>
             <input name="title">
-            <br>
-            <br>
         <label>Precio</label>
             <input name="price">
-            <br>
-            <br>
         <label>Url Foto</label>
             <input name="thumbnail">
-            <input type="submit">
+            <input type="submit" class="btn">
     </form>
+    <h2 class="SubTitle">Chat de Mascotas</h2>
+        <div class="chat">
+            <div class="chatBox" id="chatBox">
+                <div class="usersMessageBox">
+                    <p class="msgInfo">ChatBot</p>
+                    <p class="usersMessage">Bienvenid@ al chat de Coder!</p>
+                </div>
+                <div class="userLog"> 
+                    <div class="userMessageBox">
+                        <p class="msgInfo">ChatBot</p>
+                        <p class="userMessage">
+                            *Datos Curiosos de Perros:
+                            <li class="userMessage">- Los perros nacen sordos y ciegos.</li>
+                            <li class="userMessage">- La nariz de los perros puede llegar a tener hasta 300 millones de receptores olfativos.</li>
+                            <li class="userMessage">- Las papilas gustativas de los perros varían de 1,700 a 2,000 versus las casi 10,000 papilas gustativas que tenemos los humanos.</li>
+                            <li class="userMessage">- La inteligencia de los canes es similar a la de un niño de 2 años.</li>
+                            <li class="userMessage">- Los perros pueden llegar a entender hasta 250 palabras.</li>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+            <div class="inputMessageBox">
+                <input type="text" placeholder="Escriba su mensaje" id="inputMessage" class="inputMessage">
+            </div>
+        </div>
+
+
+    <!-- <div>
+        <input type="text" id="chatBox">
+    </div>
+    <p id="log"></p> -->
+
+
+    <script src="socket.io/socket.io.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="index.js"></script>
 </body>
 </html>

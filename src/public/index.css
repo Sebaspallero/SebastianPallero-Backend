@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+*{
+  text-decoration: none;
+  list-style: none;
+  font-family: 'poppins';
+  scroll-behavior: smooth;
+  scroll-padding-top:4rem;
+  margin: 0;
+}
+
+:root {
+  --orange-clr: #ec974c;
+  --black-clr: #352d7a;
+  --white-clr: #fff;
+  --light-clr:#666;
+  --light-bck:#eee;
+  --border: .2rem solid #130f40;
+  --border-white: .2rem solid #fff;
+  --boxShadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+}
+
+.SubTitle{
+    margin: 1em;
+    color:var(--black-clr);
+}
+
+.productForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 2em;
+}
+
+.productForm input{
+    margin-top: 1em;
+}
+
+.btn{
+    padding: 1em 2em;
+    border-radius: 2em;
+    background-color: #382f9b;
+    color: #eee;
+    border: none;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn:hover{
+    background-color: #645bc9;
+}
+
+.chat{
+    background-color: var(--black-clr);
+    margin: 1em;
+    border-radius: 10px;
+}
+
+.chatBox{
+    padding: 30px;
+	max-height: 600px;
+	overflow-y: scroll;
+}
+
+.chatBox::-webkit-scrollbar {
+    width: 10px;
+  }
+ 
+.chatBox::-webkit-scrollbar-thumb {
+    background-color: #ec974c;
+    border-radius: 10px;
+  }
+
+.usersLog{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.usersMessageBox{
+    justify-items: flex-start;
+    margin: 1em;
+    padding: 1.2em;
+    background-color: #130f40;
+    border-radius: 10px;
+    max-width: 50%;
+}
+
+.msgInfo{
+    display:inline;
+    margin-bottom: 5em;
+    color: #eee;
+    font-size: .7rem;
+    margin-right: 1em;
+}
+
+
+.usersMessage{
+    color: #eee;
+    font-size: .9rem;
+    margin-top: 1em;
+}
+
+.userLog{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.userMessageBox{
+    justify-items: flex-end;
+    margin: 1em;
+    padding: 1.2em;
+    background-color: #ec974c;
+    border-radius: 10px;
+    max-width:50%;;
+}
+
+
+.userMessage{
+    color: #eee;
+    font-size: .9rem;
+    margin-top: 1em;
+}
+
+.inputMessageBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #382f9b;
+    padding: 1em;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.inputMessage{
+    margin: 1.5em;
+    padding: 1em;
+    background-color: #eee;
+    border: none;
+    border-radius: 15px;
+    width: 50%;
+}
+
+.inputMessage:focus{
+    outline:#645bc9 ;
+}

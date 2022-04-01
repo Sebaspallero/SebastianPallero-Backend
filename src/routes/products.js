@@ -31,5 +31,25 @@ router.get('/:id',(req,res)=>{
     });
 })
 
+router.delete('/:id',(req,res)=>{
+    let url = parseInt(req.params.id)
+    const deleted = products.filter((product)=>{return product.id == url;});
+    if(deleted) { 
+        products = products.filter(product => product.id != url);
+        res.send({
+            status: "succes",
+            message: "Product deleted"
+        })}
+
+    else{res.status(400).send({error: "Product not found"})}
+    //FIX VERIFICATION
+})
+
+router.put('/id',(req,res)=>{
+    let url = parseInt(req.params.id)
+    const updated = products.filter((product)=>{return product.id == url;});
+    //FINISH
+})
+
 
 export default router;
