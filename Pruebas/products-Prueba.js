@@ -1,36 +1,46 @@
-/* import express from 'express'
-import ProductContainer from '../services/productContainer.js';
-
-const router = express.Router(); //Router con Mayus.
-const productService = new ProductContainer();
-
-
+/* let products = []
 
 router.get ('/',(req,res)=>{
-    if (productService.getAllProducts() == 0) return res.status(400).send({error:'No products on the list'});
-    res.send(productService);
+    if (products == 0) return res.status(400).send({error:'No products on the list'});
+    res.send({status:'succes', payload:products})
 })
 
-
+router.post('/',adminMiddleware,(req,res) =>{
+    let product = req.body;
+    let id = {id:products.length+1}
+    product = {...product, ...id}
+    products.push(product);
+    res.send({status:'succes', message:'Product saved'})
+})
 
 router.get('/:id',(req,res)=>{
-    let url = (req.params.id)
-    if (url == NaN) return res.status(400).send({error:'ID must be a number'}); // NOT WORKING, RETURNS 3rd ERROR
+    let url = parseInt(req.params.id)
+    const findProduct = products.filter((product)=>{return product.id == url;});
+    if (url == NaN) return res.status(400).send({error:'ID must be a number'}); // NOT WORKING
     if (url <= 0) return res.status(400).send({error:'ID must be higher than 0'});
-    if (url > productService.getProduct(url)) return res.status(400).send({error:'Product does not exist, try a different ID'});
+    if (url > products.length) return res.status(400).send({error:'Product does not exist, try a different ID'});
     res.send({
         message:'This is your product',
-        product: productService.getProduct(url)
+        product: findProduct
     });
 })
 
+router.delete('/:id',adminMiddleware,(req,res)=>{
+    let url = parseInt(req.params.id)
+    const deleted = products.filter((product)=>{return product.id == url;});
+    if(deleted) { 
+        products = products.filter(product => product.id != url);
+        res.send({
+            status: "succes",
+            message: "Product deleted"
+        })}
 
-
-router.post('/',(req,res) =>{
-    let id = productService.getAllProducts().length+1
-    let {title,price,thumbnail} = req.body;
-    let product = productService.saveProduct({title,price,thumbnail,id});
-    res.send({message:'Product saved'})
+    else{res.status(400).send({error: "Product not found"})}
+    //FIX VERIFICATION
 })
 
-export default router; */
+router.put('/id',adminMiddleware,(req,res)=>{
+    let url = parseInt(req.params.id)
+    const updated = products.filter((product)=>{return product.id == url;});
+    //FINISH
+})  */
